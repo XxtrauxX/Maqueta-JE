@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JE Autos · Galería de diseño — Marketplace de vehículos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0B1220;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ 
+/* ============ CONTROL BAR (constant chrome) ============ */
+.bar{position:sticky;top:0;z-index:80;background:#0B1220;border-bottom:1px solid #1E2A3D}
+.bar-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 22px;flex-wrap:wrap}
+.brand{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:#fff;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:#E8741E;box-shadow:0 0 0 4px rgba(232,116,30,.25)}
+.brand small{font-weight:500;font-size:12px;color:#7E8DA6;font-family:'Inter'}
+.themes{display:flex;gap:6px;background:#131C2E;border:1px solid #1E2A3D;border-radius:999px;padding:5px}
+.thm{display:flex;align-items:center;gap:8px;border:0;background:none;color:#9DAAC2;font:600 12.5px 'Inter';padding:8px 14px;border-radius:999px;cursor:pointer;transition:.18s}
+.thm .sw{display:flex;gap:3px}
+.thm .sw i{width:9px;height:9px;border-radius:50%;display:block}
+.thm:hover{color:#fff}
+.thm.on{background:#fff;color:#0B1220}
+.tabs{display:flex;gap:3px;margin-left:auto;background:#131C2E;border:1px solid #1E2A3D;border-radius:999px;padding:5px}
+.tab{font:600 12.5px 'Inter';color:#9DAAC2;background:none;border:0;padding:8px 14px;border-radius:999px;cursor:pointer;transition:.18s}
+.tab:hover{color:#fff}.tab.on{background:#E8741E;color:#fff}
+ 
+.capwrap{max-width:1240px;margin:0 auto;padding:16px 22px 0}
+.cap{display:flex;align-items:center;gap:10px;color:#9DAAC2;font-size:13px}
+.cap b{color:#fff;font-family:'Plus Jakarta Sans';font-weight:700}
+.cap .pill{font:600 11px 'Inter';padding:4px 10px;border-radius:999px;background:#131C2E;border:1px solid #1E2A3D;color:#9DAAC2}
+ 
+/* ============ THEMED APP ============ */
+.app{
+  --r:16px;--r-sm:10px;--r-lg:22px;
+  --sh-sm:0 1px 2px rgba(8,15,30,.06),0 2px 6px rgba(8,15,30,.06);
+  --sh:0 10px 26px rgba(8,15,30,.12);--sh-lg:0 24px 52px rgba(8,15,30,.30);
+  background:var(--bg);min-height:100vh;padding:8px 0 70px;transition:background .3s;
+}
+.stage{max-width:1240px;margin:0 auto;padding:16px 22px 0}
+.app *::selection{background:var(--accent);color:#fff}
+ 
+/* themes */
+.app[data-theme="confianza"]{
+  --bg:#F4F7FA;--surface:#fff;--surface-2:#F8FAFC;--ink:#16202E;--muted:#5C6B7A;--line:#E4EAF1;
+  --primary:#1F3B5B;--primary-2:#2E6CA4;--primary-50:#EAF1F8;--accent:#E8741E;--accent-600:#D9650F;--accent-2:#E8741E;--on-accent:#fff;
+  --success:#2E7D46;--success-bg:#E9F4ED;
+  --disp:'Plus Jakarta Sans',sans-serif;--h-tr:none;--h-ls:-.015em;--h-fw:700;--heading-col:var(--primary);
+  --grad:linear-gradient(135deg,#1F3B5B,#2E6CA4);--logo-grad:linear-gradient(135deg,#1F3B5B,#2E6CA4);
+  --btn-pri-bg:#1F3B5B;--btn-pri-fg:#fff;--chip-on:#1F3B5B;--chip-on-fg:#fff;--price-col:#1F3B5B;
+  --nav-bg:#fff;--frame-bg:#fff;--chrome-bg:#F8FAFC;--field-bg:#fff;--seg-on-bg:#fff;--seg-on-fg:#1F3B5B;
+  --lb-bg:radial-gradient(120% 120% at 0% 0%,#27496F,#1F3B5B 60%);
+  --hero-bg:linear-gradient(135deg,#1F3B5B,#27496F);--hero-ink:#fff;--hero-align:left;--hl-col:#E8741E;
+}
+.app[data-theme="moderno"]{
+  --bg:#EDF6F5;--surface:#fff;--surface-2:#F2F8F7;--ink:#13242B;--muted:#5A7079;--line:#DBEAE8;
+  --primary:#0E7C7B;--primary-2:#12A5A3;--primary-50:#E1F3F2;--accent:#F4A300;--accent-600:#DD9200;--accent-2:#0E7C7B;--on-accent:#13242B;
+  --success:#0E9F6E;--success-bg:#E2F4EC;
+  --disp:'Space Grotesk',sans-serif;--h-tr:none;--h-ls:-.02em;--h-fw:700;--heading-col:var(--ink);
+  --grad:linear-gradient(135deg,#15B3B0,#0E7C7B);--logo-grad:linear-gradient(135deg,#15B3B0,#0E7C7B);
+  --btn-pri-bg:linear-gradient(135deg,#15B3B0,#0E7C7B);--btn-pri-fg:#fff;--chip-on:linear-gradient(135deg,#15B3B0,#0E7C7B);--chip-on-fg:#fff;--price-col:#0E7C7B;
+  --nav-bg:#fff;--frame-bg:#fff;--chrome-bg:#F2F8F7;--field-bg:#fff;--seg-on-bg:#fff;--seg-on-fg:#0E7C7B;
+  --lb-bg:linear-gradient(135deg,#15B3B0,#0E7C7B);
+  --hero-bg:#F2F8F7;--hero-ink:#13242B;--hero-align:center;--hl-col:#0E7C7B;
+}
+.app[data-theme="automotriz"]{
+  --bg:#0E0E11;--surface:#17171B;--surface-2:#1F1F25;--surface-3:#26262D;--ink:#F4F5F7;--muted:#9AA0A6;--line:#2C2C33;
+  --primary:#D62828;--primary-2:#E84545;--primary-50:rgba(214,40,40,.12);--accent:#D62828;--accent-600:#B71F1F;--accent-2:#E84545;--on-accent:#fff;
+  --success:#3DCF7A;--success-bg:rgba(61,207,122,.14);--silver:#C7CCD1;
+  --disp:'Oswald',sans-serif;--h-tr:uppercase;--h-ls:.01em;--h-fw:600;--heading-col:var(--ink);
+  --grad:linear-gradient(135deg,#D62828,#B71F1F);--logo-grad:#D62828;
+  --btn-pri-bg:#C7CCD1;--btn-pri-fg:#15151A;--chip-on:#D62828;--chip-on-fg:#fff;--price-col:#fff;
+  --nav-bg:#101013;--frame-bg:#17171B;--chrome-bg:#0B0B0E;--field-bg:#1F1F25;--seg-on-bg:#D62828;--seg-on-fg:#fff;
+  --lb-bg:linear-gradient(150deg,#1A1A1F,#0B0B0E);
+  --hero-bg:linear-gradient(120deg,#0B0B0E 40%,#1A1216);--hero-ink:#fff;--hero-align:left;--hl-col:#E84545;
+  --sh-lg:0 24px 52px rgba(0,0,0,.6);
+}
+ 
+.app h1,.app h2,.app h3,.app h4{font-family:var(--disp);line-height:1.12;letter-spacing:var(--h-ls);font-weight:var(--h-fw);color:var(--heading-col);text-transform:var(--h-tr)}
+ 
+.frame{background:var(--frame-bg);border-radius:var(--r-lg);box-shadow:var(--sh-lg);overflow:hidden;border:1px solid var(--line)}
+.chrome{display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--chrome-bg);border-bottom:1px solid var(--line)}
+.chrome i{width:11px;height:11px;border-radius:50%}.chrome .r{background:#FF5F57}.chrome .y{background:#FEBC2E}.chrome .g{background:#28C840}
+.chrome .u{margin-left:12px;flex:1;background:var(--field-bg);border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:12px;color:var(--muted)}
+.screen{display:none}.screen.on{display:block;animation:f .35s ease}
+@keyframes f{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+ 
+.btn{font:600 13.5px 'Inter';border:0;border-radius:var(--r-sm);padding:12px 18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.15s;white-space:nowrap}
+.btn-acc{background:var(--accent);color:var(--on-accent)}.btn-acc:hover{background:var(--accent-600)}
+.btn-pri{background:var(--btn-pri-bg);color:var(--btn-pri-fg)}.btn-pri:hover{filter:brightness(1.04)}
+.btn-out{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn-out:hover{border-color:var(--primary-2)}
+.btn-wa{background:#25D366;color:#fff}.btn-wa:hover{filter:brightness(.96)}
+.btn-b{width:100%}
+.chip{font:600 12.5px 'Inter';padding:9px 15px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--heading-col);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:8px}
+.chip:hover{border-color:var(--primary-2)}.chip.on{background:var(--chip-on);color:var(--chip-on-fg);border-color:transparent}
+.bdg{font:600 11px 'Inter';padding:5px 9px;border-radius:7px;display:inline-flex;align-items:center;gap:5px}
+.bdg-v{background:var(--success-bg);color:var(--success)}.bdg-s{background:var(--primary-50);color:var(--primary-2)}.bdg-m{background:rgba(128,128,128,.12);color:var(--muted)}
+ 
+.nav{display:flex;align-items:center;gap:18px;padding:13px 22px;background:var(--nav-bg);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:var(--h-fw);font-size:18px;color:var(--heading-col);text-transform:var(--h-tr);letter-spacing:var(--h-ls)}
+.logo .m{width:30px;height:30px;border-radius:9px;background:var(--logo-grad);display:grid;place-items:center;color:#fff}.logo .m svg{width:17px;height:17px}
+.search{flex:1;max-width:470px;display:flex;align-items:center;gap:9px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:9px 16px;color:var(--muted)}
+.search input{border:0;background:none;outline:0;flex:1;font:400 14px 'Inter';color:var(--ink)}
+.nlinks{display:flex;align-items:center;gap:18px;font:600 14px 'Inter';color:var(--heading-col)}.nlinks a:hover{color:var(--primary-2)}
+.av{width:38px;height:38px;border-radius:50%;background:var(--logo-grad);color:#fff;display:grid;place-items:center;font:700 13px var(--disp)}
+.ico{width:20px;height:20px;display:inline-block;vertical-align:middle}
+ 
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-sm);transition:.18s;cursor:pointer}
+.app[data-theme="automotriz"] .card{background:var(--surface-2)}
+.card:hover{box-shadow:var(--sh);transform:translateY(-4px)}
+.ph{position:relative;aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
+.ph svg.car{width:46%;opacity:.95;color:#fff;position:relative;z-index:1}
+.ph .fav{position:absolute;top:11px;right:11px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#5C6B7A;z-index:2}
+.app[data-theme="automotriz"] .ph .fav{background:rgba(0,0,0,.5);color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:8px}
+.ph .cnt{position:absolute;bottom:11px;right:11px;background:rgba(16,24,38,.74);color:#fff;font:600 11px 'Inter';padding:4px 9px;border-radius:7px;z-index:2}
+.ph .pin{position:absolute;top:11px;left:11px;z-index:2}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45));opacity:0}
+.app[data-theme="automotriz"] .ph::after{opacity:1}
+.g1{background:linear-gradient(135deg,#28456A,#3E6FA0)}.g2{background:linear-gradient(135deg,#2F6E6B,#4DA0A0)}.g3{background:linear-gradient(135deg,#3A4A63,#62708C)}.g4{background:linear-gradient(135deg,#5A4A8A,#8A7BC0)}.g5{background:linear-gradient(135deg,#7A4B2E,#C0875E)}.g6{background:linear-gradient(135deg,#234E63,#3D86A6)}
+.app[data-theme="moderno"] .g1{background:linear-gradient(135deg,#0E7C7B,#15B3B0)}.app[data-theme="moderno"] .g2{background:linear-gradient(135deg,#1B8A86,#37C3BE)}.app[data-theme="moderno"] .g3{background:linear-gradient(135deg,#2A7F8C,#49AEB8)}.app[data-theme="moderno"] .g4{background:linear-gradient(135deg,#3E7C9A,#5FB0C8)}.app[data-theme="moderno"] .g5{background:linear-gradient(135deg,#C7902B,#E8B85A)}.app[data-theme="moderno"] .g6{background:linear-gradient(135deg,#13726E,#2DA59E)}
+.app[data-theme="automotriz"] .g1{background:linear-gradient(135deg,#2A2A30,#3C3C45)}.app[data-theme="automotriz"] .g2{background:linear-gradient(135deg,#3A2326,#5A3034)}.app[data-theme="automotriz"] .g3{background:linear-gradient(135deg,#26262D,#3A3A44)}.app[data-theme="automotriz"] .g4{background:linear-gradient(135deg,#2C2A36,#46435A)}.app[data-theme="automotriz"] .g5{background:linear-gradient(135deg,#3A2E22,#5C4632)}.app[data-theme="automotriz"] .g6{background:linear-gradient(135deg,#22303A,#34505E)}
+.cb{padding:14px 15px 16px}
+.price{font-family:var(--disp);font-weight:var(--h-fw);font-size:20px;color:var(--price-col);letter-spacing:var(--h-ls)}
+.price em{font-style:normal;color:inherit}
+.app[data-theme="automotriz"] .price em,.app[data-theme="automotriz"] .dprice em{color:var(--accent-2)}
+.card h3{font-size:15px;font-weight:600;margin:3px 0 8px;color:var(--ink);text-transform:none;letter-spacing:0;font-family:'Inter'}
+.sp{display:flex;flex-wrap:wrap;gap:5px 13px;color:var(--muted);font-size:12.5px;font-weight:500}.sp span{display:flex;align-items:center;gap:5px}
+.cf{margin-top:12px;padding-top:11px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.link{color:var(--primary-2);font-weight:600;font-size:13px}
+.app[data-theme="automotriz"] .link{color:var(--accent-2)}
+ 
+.pad{padding:26px 28px}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.sh h2{font-size:21px}
+.lbl{font:600 11px 'Inter';color:var(--muted);text-transform:uppercase;letter-spacing:.13em;margin:0 4px 11px}
+ 
+/* login */
+.login{display:grid;grid-template-columns:1.05fr 1fr;min-height:560px}
+.lb{background:var(--lb-bg);color:#fff;padding:44px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.lb .stripe{position:absolute;top:0;left:0;width:6px;height:100%;background:var(--accent);display:none}
+.app[data-theme="automotriz"] .lb .stripe{display:block}
+.lb .glow{position:absolute;width:360px;height:360px;border-radius:50%;bottom:-130px;right:-90px;display:none}
+.app[data-theme="confianza"] .lb .glow{display:block;background:radial-gradient(circle,rgba(232,116,30,.32),transparent 70%)}
+.app[data-theme="automotriz"] .lb .glow{display:block;background:radial-gradient(circle,rgba(214,40,40,.28),transparent 70%)}
+.lb .b1,.lb .b2{position:absolute;border-radius:50%;display:none}
+.app[data-theme="moderno"] .lb .b1{display:block;width:300px;height:300px;background:rgba(244,163,0,.25);bottom:-110px;right:-70px;filter:blur(6px)}
+.app[data-theme="moderno"] .lb .b2{display:block;width:180px;height:180px;background:rgba(255,255,255,.12);top:-50px;left:-40px}
+.lb>*{position:relative}
+.lb .logo{color:#fff}.lb .logo .m{background:rgba(255,255,255,.16)}
+.lb h1{color:#fff;font-size:34px;margin:28px 0 12px;max-width:13ch}
+.lb h1 em{font-style:normal;color:var(--accent-2)}
+.lb p{color:rgba(255,255,255,.82);font-size:15px;max-width:34ch}
+.tl{list-style:none;margin-top:28px;display:grid;gap:13px}
+.tl li{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.92);font-size:14.5px;font-weight:500}
+.tl .t{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none}
+.app[data-theme="automotriz"] .tl .t{color:var(--accent-2);background:rgba(214,40,40,.18)}
+.lf{padding:46px;display:flex;flex-direction:column;justify-content:center;background:var(--surface)}
+.seg{display:flex;background:var(--surface-2);border-radius:11px;padding:4px;margin-bottom:24px;border:1px solid var(--line)}
+.seg button{flex:1;border:0;background:none;font:600 14px 'Inter';color:var(--muted);padding:10px;border-radius:8px;cursor:pointer}
+.seg button.on{background:var(--seg-on-bg);color:var(--seg-on-fg)}
+.fld{margin-bottom:15px}.fld label{display:block;font:600 13px 'Inter';color:var(--heading-col);margin-bottom:7px}
+.inp{width:100%;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;font:400 14.5px 'Inter';background:var(--field-bg);color:var(--ink);transition:.15s}
+.inp:focus{outline:0;border-color:var(--primary-2);box-shadow:0 0 0 3px rgba(120,140,180,.18)}
+.rb{display:flex;align-items:center;justify-content:space-between;margin:-2px 0 16px}
+.ck{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted)}.ck input{accent-color:var(--primary-2)}
+.div{display:flex;align-items:center;gap:14px;color:var(--muted);font-size:12.5px;margin:18px 0}.div::before,.div::after{content:"";height:1px;background:var(--line);flex:1}
+.goog{display:flex;align-items:center;justify-content:center;gap:11px;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;font:600 14px 'Inter';color:var(--heading-col);background:var(--surface-2);cursor:pointer}
+.fp{font-size:12px;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6}.fp a{color:var(--primary-2);font-weight:600}
+ 
+/* hero */
+.hero{background:var(--hero-bg);color:var(--hero-ink);padding:48px 32px 58px;position:relative;overflow:hidden;text-align:var(--hero-align)}
+.hero .in{position:relative;z-index:2}
+.app[data-theme="moderno"] .hero .in{max-width:760px;margin:0 auto}
+.hero .glow{position:absolute;width:440px;height:440px;border-radius:50%;top:-170px;right:-110px;display:none}
+.app[data-theme="confianza"] .hero .glow{display:block;background:radial-gradient(circle,rgba(232,116,30,.2),transparent 70%)}
+.app[data-theme="automotriz"] .hero .glow{display:block;background:radial-gradient(circle,rgba(214,40,40,.22),transparent 70%)}
+.hero .b1,.hero .b2{position:absolute;border-radius:50%;display:none}
+.app[data-theme="moderno"] .hero .b1{display:block;width:360px;height:360px;background:radial-gradient(circle,rgba(18,165,163,.18),transparent 70%);top:-120px;left:-60px}
+.app[data-theme="moderno"] .hero .b2{display:block;width:320px;height:320px;background:radial-gradient(circle,rgba(244,163,0,.16),transparent 70%);bottom:-140px;right:-40px}
+.hero .eyebrow{display:none;align-items:center;gap:8px;margin-bottom:14px;font:600 12.5px 'Inter'}
+.app[data-theme="moderno"] .hero .eyebrow{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:var(--primary)}
+.app[data-theme="automotriz"] .hero .eyebrow{display:inline-flex;color:var(--accent-2);letter-spacing:.12em;text-transform:uppercase}
+.hero h1{color:var(--hero-ink);font-size:38px;max-width:16ch;margin-bottom:10px}
+.app[data-theme="moderno"] .hero h1{margin-left:auto;margin-right:auto}
+.app[data-theme="automotriz"] .hero h1{font-size:48px;line-height:1}
+.hero h1 em{font-style:normal;color:var(--hl-col)}
+.app[data-theme="moderno"] .hero h1 em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--hero-ink);opacity:.82;font-size:16px;max-width:46ch;margin-bottom:24px}
+.app[data-theme="moderno"] .hero p{margin-left:auto;margin-right:auto;color:var(--muted);opacity:1}
+.sbox{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:10px;display:flex;gap:8px;max-width:760px;flex-wrap:wrap;text-align:left}
+.app[data-theme="moderno"] .sbox{border-radius:20px;margin:0 auto}
+.app[data-theme="confianza"] .sbox{border:0}
+.sbox>.btn{border-radius:12px;align-self:stretch}
+.sf{flex:1;min-width:150px;display:flex;flex-direction:column;padding:8px 16px;border-radius:10px}
+.sf+.sf{border-left:1px solid var(--line)}
+.sf label{font:600 11px 'Inter';color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.sf .v{font:600 14.5px 'Inter';color:var(--ink)}.sf .v.ph{color:var(--muted);opacity:.7;font-weight:500}
+.cats{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.app[data-theme="moderno"] .cats{justify-content:center}
+ 
+/* results */
+.res{display:grid;grid-template-columns:262px 1fr;gap:26px}
+.fil{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;align-self:start;position:sticky;top:84px}
+.app[data-theme="automotriz"] .fil{background:var(--surface-2)}
+.fil h4{font-size:15px;margin-bottom:4px}
+.fg{padding:15px 0;border-bottom:1px solid var(--line)}.fg:last-child{border:0;padding-bottom:0}
+.ft{font:700 13px 'Inter';color:var(--heading-col);margin-bottom:10px;display:flex;justify-content:space-between}
+.fo{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink);opacity:.85;margin-bottom:9px;cursor:pointer}.fo input{accent-color:var(--primary-2)}.fo .n{margin-left:auto;color:var(--muted);opacity:.7;font-size:12px}
+.rng{display:flex;gap:8px;margin-top:4px}.rng .inp{padding:9px 11px;font-size:13px}
+.rh{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}.rh h2{font-size:20px}
+.sort{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted)}
+.sel{border:1px solid var(--line);border-radius:9px;padding:9px 13px;font:600 13.5px 'Inter';color:var(--heading-col);background:var(--surface);cursor:pointer}
+.app[data-theme="automotriz"] .sel{background:var(--surface-2)}
+ 
+/* detail */
+.det{display:grid;grid-template-columns:1.25fr .9fr;gap:28px}
+.gal .main{aspect-ratio:16/10;border-radius:var(--r);overflow:hidden;display:grid;place-items:center;position:relative}.gal .main svg.car{width:42%;color:#fff}
+.gal .main .cnt{position:absolute;bottom:12px;right:12px}
+.th{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.th div{aspect-ratio:16/11;border-radius:9px;overflow:hidden;cursor:pointer;border:2px solid transparent;display:grid;place-items:center}.th div.on{border-color:var(--accent)}.th div svg{width:42%;color:#fff;opacity:.9}
+.dp{align-self:start}
+.dprice{font-family:var(--disp);font-weight:var(--h-fw);font-size:32px;color:var(--price-col);letter-spacing:var(--h-ls)}.dprice em{font-style:normal;color:inherit}
+.dp h1{font-size:23px;margin:6px 0 2px}
+.dm{color:var(--muted);font-size:14px;margin-bottom:16px}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.specs div{background:var(--surface);padding:13px 15px}
+.app[data-theme="automotriz"] .specs div{background:var(--surface-2)}
+.specs .k{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.specs .v{font:600 15px var(--disp);color:var(--heading-col);margin-top:3px;text-transform:var(--h-tr)}
+.sell{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:16px}
+.sell .top{display:flex;align-items:center;gap:12px;margin-bottom:14px}.sell .nm{font:var(--h-fw) 15px var(--disp);color:var(--heading-col);text-transform:var(--h-tr)}.sell .su{font-size:12.5px;color:var(--muted)}
+.stk{display:grid;gap:10px}
+.desc{margin-top:24px}.desc h3{font-size:17px;margin-bottom:9px}.desc p{color:var(--ink);opacity:.8;font-size:14.5px;line-height:1.7;max-width:64ch}
+.foot{text-align:center;color:var(--muted);font-size:12.5px;margin-top:24px;line-height:1.7}
+ 
+@media(max-width:920px){.grid{grid-template-columns:repeat(2,1fr)}.login{grid-template-columns:1fr}.lb{display:none}.res{grid-template-columns:1fr}.fil{position:static}.det{grid-template-columns:1fr}}
+@media(max-width:560px){.grid,.grid2{grid-template-columns:1fr}.nlinks{display:none}.sf+.sf{border-left:0;border-top:1px solid var(--line)}.tabs,.themes{margin-left:0}}
+/* ============ START MENU (chooser) ============ */
+#chooser{min-height:100vh;background:radial-gradient(120% 90% at 50% 0%,#13243E,#0B1220 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 22px;text-align:center}
+#chooser .ch-brand{display:flex;align-items:center;gap:10px;font-family:'Plus Jakarta Sans';font-weight:800;font-size:15px;color:#fff;margin-bottom:28px}
+#chooser .ch-brand .dot{width:9px;height:9px;border-radius:50%;background:#E8741E;box-shadow:0 0 0 4px rgba(232,116,30,.25)}
+#chooser .ch-brand small{font-weight:500;font-size:12px;color:#7E8DA6}
+#chooser h1{font-family:'Plus Jakarta Sans';font-weight:800;font-size:34px;color:#fff;letter-spacing:-.02em;margin-bottom:10px;max-width:18ch}
+#chooser h1 em{font-style:normal;color:#E8741E}
+#chooser .sub{color:#9DAAC2;font-size:15.5px;max-width:52ch;margin-bottom:16px;line-height:1.6}
+#chooser .ch-note{display:inline-flex;align-items:center;gap:10px;color:#AEBBD0;background:#131C2E;border:1px solid #243248;font-size:12.5px;line-height:1.5;max-width:62ch;padding:11px 16px;border-radius:12px;margin-bottom:38px;text-align:left}
+#chooser .ch-note .tag{flex:none;font:700 10px 'Inter';letter-spacing:.08em;text-transform:uppercase;color:#9DB4D8;background:rgba(46,108,164,.18);border:1px solid rgba(46,108,164,.4);padding:4px 9px;border-radius:999px}
+.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:980px;width:100%}
+.ch-card{background:#131C2E;border:1px solid #1E2A3D;border-radius:18px;overflow:hidden;cursor:pointer;transition:.2s;text-align:left;display:flex;flex-direction:column}
+.ch-card:hover{transform:translateY(-6px);border-color:#33405A;box-shadow:0 26px 50px rgba(0,0,0,.4)}
+.ch-prev{height:120px;position:relative;display:flex;align-items:flex-end;padding:14px}
+.ch-prev .mini{display:flex;gap:7px;align-items:center}
+.ch-prev .mini b{font:700 12px 'Inter';padding:6px 12px;border-radius:8px}
+.ch-prev .mini i{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#fff}
+.ch-prev .mini i svg{width:17px;height:17px}
+.ch-sw{position:absolute;top:14px;right:14px;display:flex;gap:5px}
+.ch-sw span{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.5)}
+.ch-body{padding:16px 18px 20px;flex:1;display:flex;flex-direction:column}
+.ch-body .nm{font-family:'Plus Jakarta Sans';font-weight:700;font-size:18px;color:#fff;display:flex;align-items:center;gap:8px}
+.ch-body .nm .tag{font:600 10px 'Inter';color:#0B1220;background:#3DCF7A;padding:3px 8px;border-radius:999px}
+.ch-body .ds{color:#9DAAC2;font-size:13px;line-height:1.55;margin:8px 0 16px;flex:1}
+.ch-go{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 13.5px 'Inter';color:#fff;background:#22304A;border:1px solid #33405A;border-radius:10px;padding:11px;transition:.15s}
+.ch-card:hover .ch-go{background:#E8741E;border-color:#E8741E}
+#chooser .ch-foot{margin-top:36px;color:#5E6E88;font-size:12.5px}
+.backbtn{display:inline-flex;align-items:center;gap:7px;border:0;background:#E8741E;color:#fff;font:700 12.5px 'Inter';cursor:pointer;padding:9px 15px;border-radius:999px;transition:.15s;box-shadow:0 4px 12px rgba(232,116,30,.32)}
+.backbtn:hover{background:#D9650F;transform:translateY(-1px)}
+@media(max-width:760px){.ch-grid{grid-template-columns:1fr;max-width:420px}#chooser h1{font-size:27px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="car" viewBox="0 0 64 32"><path fill="currentColor" d="M6 24c0 1.1.9 2 2 2h2.2a4 4 0 0 0 7.6 0h28.4a4 4 0 0 0 7.6 0H58c1.1 0 2-.9 2-2v-5c0-1.4-.7-2.7-1.9-3.4l-4-2.3-5.3-6.6A5 5 0 0 0 41 4H21a5 5 0 0 0-3.9 1.9L11.5 13l-5 1.4A4 4 0 0 0 4 18.2V22c0 1 .9 2 2 2Zm8-2a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm36 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0ZM20.5 8h9v6H14.7l4-5.2c.4-.5 1-.8 1.8-.8Zm13 0H41c.6 0 1.2.3 1.6.8L46.7 14H33.5V8Z"/></symbol>
+  <symbol id="wheel" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 4.5a5.5 5.5 0 0 1 5.2 3.7l-3.3 1.1a2 2 0 0 0-1.9-1.3V6.5Zm-2 .3v3.5a2 2 0 0 0-1.1 1.6l-3.3-.4A5.5 5.5 0 0 1 10 6.8ZM6.6 14.3l3.3-1.1c.3.4.7.7 1.1.9l-1 3.3a5.5 5.5 0 0 1-3.4-3.1Zm6.9 3.1-1-3.3c.5-.2.9-.6 1.2-1l3.2 1.2a5.5 5.5 0 0 1-3.4 3.1Z"/></symbol>
+  <symbol id="srch" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14Zm10 17-4-4"/></symbol>
+</svg>
+ 
+<section id="chooser">
+  <div class="ch-brand"><span class="dot"></span> JE Autos <small>Demostración de diseño</small></div>
+  <h1>Elija un <em>estilo</em> para la demostración</h1>
+  <p class="sub">Tres propuestas visuales para el mismo marketplace de vehículos. Escoja una para recorrer las pantallas; podrá cambiarla en cualquier momento desde el menú superior.</p>
+  <p class="ch-note"><span class="tag">Nota</span> Esta es una muestra de estilos y colores, no la versión final del producto. El logo, las imágenes y los textos son de ejemplo y se definirán durante el desarrollo.</p>
+  <div class="ch-grid">
+    <button class="ch-card" data-t="confianza">
+      <div class="ch-prev" style="background:linear-gradient(135deg,#1F3B5B,#2E6CA4)">
+        <span class="ch-sw"><span style="background:#1F3B5B"></span><span style="background:#2E6CA4"></span><span style="background:#E8741E"></span></span>
+        <div class="mini"><i style="background:rgba(255,255,255,.16)"><svg viewBox="0 0 24 24" fill="#fff"><use href="#wheel"/></svg></i><b style="background:#E8741E;color:#fff">Buscar</b></div>
+      </div>
+      <div class="ch-body"><div class="nm">Confianza <span class="tag">Recomendada</span></div><div class="ds">Azul marino + naranja. Limpio y aireado, grado fintech. Transmite seguridad — ideal donde se mueve dinero.</div><span class="ch-go">Ver propuesta →</span></div>
+    </button>
+    <button class="ch-card" data-t="moderno">
+      <div class="ch-prev" style="background:linear-gradient(135deg,#15B3B0,#0E7C7B)">
+        <span class="ch-sw"><span style="background:#0E7C7B"></span><span style="background:#12A5A3"></span><span style="background:#F4A300"></span></span>
+        <div class="mini"><i style="background:rgba(255,255,255,.18)"><svg viewBox="0 0 24 24" fill="#fff"><use href="#wheel"/></svg></i><b style="background:#F4A300;color:#13242B">Buscar</b></div>
+      </div>
+      <div class="ch-body"><div class="nm">Moderno</div><div class="ds">Verde-azulado + ámbar con acentos en degradado. Fresco y tecnológico, con aire de startup joven.</div><span class="ch-go">Ver propuesta →</span></div>
+    </button>
+    <button class="ch-card" data-t="automotriz">
+      <div class="ch-prev" style="background:linear-gradient(135deg,#1A1A1F,#0B0B0E)">
+        <span class="ch-sw"><span style="background:#161619"></span><span style="background:#C7CCD1"></span><span style="background:#D62828"></span></span>
+        <div class="mini"><i style="background:#D62828"><svg viewBox="0 0 24 24" fill="#fff"><use href="#wheel"/></svg></i><b style="background:#D62828;color:#fff">Buscar</b></div>
+      </div>
+      <div class="ch-body"><div class="nm">Automotriz</div><div class="ds">Negro, rojo y plata. Oscuro, premium y de alto contraste, como un configurador de autos de alta gama.</div><span class="ch-go">Ver propuesta →</span></div>
+    </button>
+  </div>
+  <p class="ch-foot">JE Inversiones S.A.S. · Propuesta de Grupo Proyección — maqueta no funcional</p>
+</section>
+ 
+<div id="showcase" hidden>
+<div class="bar"><div class="bar-in">
+  <button class="backbtn" id="backBtn">◂ Cambiar estilo</button>
+  <span class="brand"><span class="dot"></span> JE Autos <small>Galería de diseño</small></span>
+  <div class="tabs">
+    <button class="tab on" data-s="login">Acceso</button>
+    <button class="tab" data-s="home">Inicio</button>
+    <button class="tab" data-s="res">Resultados</button>
+    <button class="tab" data-s="det">Detalle</button>
+  </div>
+</div></div>
+ 
+<div class="capwrap"><div class="cap"><span class="pill">Paleta activa</span> <b id="capName">Confianza</b> — <span id="capDesc">azul marino + naranja; transmite seguridad, ideal donde se mueve dinero.</span></div></div>
+ 
+<div class="app" id="app" data-theme="confianza">
+  <div class="stage">
+    <!-- LOGIN -->
+    <section class="screen on" id="login">
+      <p class="lbl">Pantalla 1 — Acceso</p>
+      <div class="frame"><div class="chrome"><i class="r"></i><i class="y"></i><i class="g"></i><span class="u">app.jeautos.co/acceso</span></div>
+        <div class="login">
+          <div class="lb"><span class="stripe"></span><span class="glow"></span><span class="b1"></span><span class="b2"></span>
+            <div class="logo"><span class="m"><svg><use href="#wheel"/></svg></span> JE&nbsp;Autos</div>
+            <div><h1 id="loginH">Compra y vende con confianza</h1><p>Publica tu carro en minutos y conecta directo con compradores. Sin intermediarios.</p>
+              <ul class="tl"><li><span class="t">✓</span> Vendedores verificados</li><li><span class="t">✓</span> Publica tú mismo, en minutos</li><li><span class="t">✓</span> Contacto directo por WhatsApp</li></ul></div>
+            <span style="color:rgba(255,255,255,.5);font-size:12px">© 2026 JE Inversiones S.A.S.</span>
+          </div>
+          <div class="lf">
+            <div class="seg"><button class="on">Iniciar sesión</button><button>Crear cuenta</button></div>
+            <div class="fld"><label>Correo electrónico</label><input class="inp" placeholder="tucorreo@ejemplo.com"></div>
+            <div class="fld"><label>Contraseña</label><input class="inp" type="password" placeholder="••••••••"></div>
+            <div class="rb"><label class="ck"><input type="checkbox" checked> Mantener sesión</label><a class="link">¿Olvidaste tu contraseña?</a></div>
+            <button class="btn btn-acc btn-b">Entrar</button>
+            <div class="div">o continúa con</div>
+            <button class="goog"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.6 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5Z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 16 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 16.3 4 9.7 8.3 6.3 14.7Z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.5-5.2l-6.2-5.3C29.2 35 26.7 36 24 36c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C9.5 39.6 16.2 44 24 44Z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.5l6.2 5.3C39.9 36.7 44 31 44 24c0-1.3-.1-2.3-.4-3.5Z"/></svg> Entrar con Google</button>
+            <p class="fp">Al continuar aceptas los <a>Términos</a> y la <a>Política de datos</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- HOME -->
+    <section class="screen" id="home">
+      <p class="lbl">Pantalla 2 — Inicio</p>
+      <div class="frame"><div class="chrome"><i class="r"></i><i class="y"></i><i class="g"></i><span class="u">app.jeautos.co</span></div>
+        <div class="nav">
+          <div class="logo"><span class="m"><svg><use href="#wheel"/></svg></span> JE Autos</div>
+          <div class="search"><svg class="ico"><use href="#srch"/></svg><input placeholder="Buscar por marca, modelo o palabra"></div>
+          <div class="nlinks"><a>Comprar</a><a>Ayuda</a></div>
+          <button class="btn btn-acc"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg> Publicar</button>
+          <div class="av">DM</div>
+        </div>
+        <div class="hero"><span class="glow"></span><span class="b1"></span><span class="b2"></span>
+          <div class="in">
+            <span class="eyebrow">● +9.000 vehículos publicados</span>
+            <h1>Encuentra tu próximo <em>carro</em></h1>
+            <p>Vehículos usados de vendedores verificados en toda Colombia. Busca, compara y contacta directo.</p>
+            <div class="sbox">
+              <div class="sf"><label>Marca</label><span class="v ph">Todas</span></div>
+              <div class="sf"><label>Precio hasta</label><span class="v ph">Sin límite</span></div>
+              <div class="sf"><label>Ciudad</label><span class="v">Bucaramanga</span></div>
+              <button class="btn btn-acc" style="padding:0 26px">Buscar</button>
+            </div>
+            <div class="cats"><span class="chip on">Todos</span><span class="chip">SUV</span><span class="chip">Sedán</span><span class="chip">Pickup</span><span class="chip">Hatchback</span><span class="chip">Moto</span></div>
+          </div>
+        </div>
+        <div class="pad"><div class="sh"><h2>Destacados</h2><a class="link">Ver todos →</a></div><div class="grid" id="grid"></div></div>
+      </div>
+    </section>
+ 
+    <!-- RESULTS -->
+    <section class="screen" id="res">
+      <p class="lbl">Pantalla 3 — Resultados</p>
+      <div class="frame"><div class="chrome"><i class="r"></i><i class="y"></i><i class="g"></i><span class="u">app.jeautos.co/buscar?ciudad=bucaramanga</span></div>
+        <div class="nav">
+          <div class="logo"><span class="m"><svg><use href="#wheel"/></svg></span> JE Autos</div>
+          <div class="search"><svg class="ico"><use href="#srch"/></svg><input value="SUV"></div>
+          <div class="nlinks"><a>Comprar</a><a>Ayuda</a></div>
+          <button class="btn btn-acc">Publicar</button><div class="av">DM</div>
+        </div>
+        <div class="pad"><div class="res">
+          <aside class="fil">
+            <h4>Filtros</h4>
+            <div class="fg"><div class="ft">Marca <a class="link" style="font-size:12px">Limpiar</a></div>
+              <label class="fo"><input type="checkbox" checked> Mazda <span class="n">312</span></label>
+              <label class="fo"><input type="checkbox"> Renault <span class="n">428</span></label>
+              <label class="fo"><input type="checkbox"> Chevrolet <span class="n">390</span></label>
+              <label class="fo"><input type="checkbox"> Toyota <span class="n">266</span></label></div>
+            <div class="fg"><div class="ft">Precio (COP)</div><div class="rng"><input class="inp" value="30.000.000"><input class="inp" value="90.000.000"></div></div>
+            <div class="fg"><div class="ft">Año</div><div class="rng"><input class="inp" value="2018"><input class="inp" value="2024"></div></div>
+            <div class="fg"><div class="ft">Transmisión</div>
+              <label class="fo"><input type="checkbox" checked> Automática <span class="n">540</span></label>
+              <label class="fo"><input type="checkbox"> Mecánica <span class="n">1.300</span></label></div>
+          </aside>
+          <div>
+            <div class="rh"><h2>SUV en Bucaramanga <span style="color:var(--muted);font-weight:500;font-size:15px">· 248 resultados</span></h2>
+              <div class="sort">Ordenar <select class="sel"><option>Más recientes</option><option>Precio ↑</option><option>Precio ↓</option></select></div></div>
+            <div class="grid2" id="grid2"></div>
+          </div>
+        </div></div>
+      </div>
+    </section>
+ 
+    <!-- DETAIL -->
+    <section class="screen" id="det">
+      <p class="lbl">Pantalla 4 — Detalle</p>
+      <div class="frame"><div class="chrome"><i class="r"></i><i class="y"></i><i class="g"></i><span class="u">app.jeautos.co/aviso/mazda-cx30-2021</span></div>
+        <div class="nav">
+          <div class="logo"><span class="m"><svg><use href="#wheel"/></svg></span> JE Autos</div>
+          <div class="search"><svg class="ico"><use href="#srch"/></svg><input placeholder="Buscar"></div>
+          <div class="nlinks"><a>Comprar</a><a>Ayuda</a></div>
+          <button class="btn btn-acc">Publicar</button><div class="av">DM</div>
+        </div>
+        <div class="pad"><div class="det">
+          <div class="gal">
+            <div class="main g1"><svg class="car"><use href="#car"/></svg><span class="cnt">📷 12 fotos</span></div>
+            <div class="th"><div class="on g1"><svg><use href="#car"/></svg></div><div class="g6"><svg><use href="#car"/></svg></div><div class="g3"><svg><use href="#car"/></svg></div><div class="g2"><svg><use href="#car"/></svg></div></div>
+            <div class="desc"><h3>Descripción del vendedor</h3><p>Mazda CX-30 Grand Touring 2021, único dueño, mantenimientos al día en concesionario. Llantas nuevas, sin choques, papeles al día hasta 2026. Recibo moto de menor valor como parte de pago.</p></div>
+          </div>
+          <div class="dp">
+            <span class="bdg bdg-s">SUV · Usado</span>
+            <div class="dprice" style="margin-top:10px"><em>$</em> 89.900.000</div>
+            <h1>Mazda CX-30 Grand Touring</h1>
+            <div class="dm">2021 · Bucaramanga, Santander</div>
+            <div class="specs"><div><div class="k">Kilometraje</div><div class="v">42.500 km</div></div><div><div class="k">Transmisión</div><div class="v">Automática</div></div><div><div class="k">Combustible</div><div class="v">Gasolina</div></div><div><div class="k">Color</div><div class="v">Gris</div></div></div>
+            <div class="sell">
+              <div class="top"><div class="av" style="width:46px;height:46px">CR</div><div><div class="nm">Carlos Rueda</div><div class="su">Vendedor particular · Desde 2024</div></div><span class="bdg bdg-v" style="margin-left:auto">✓ Verificado</span></div>
+              <div class="stk"><button class="btn btn-wa btn-b">Escribir por WhatsApp</button><button class="btn btn-pri btn-b">Ver número de teléfono</button><button class="btn btn-out btn-b">♡ Guardar</button></div>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-top:12px;text-align:center">Publicado hace 3 días · 1.240 visitas</p>
+          </div>
+        </div></div>
+      </div>
+      <p class="foot">El nombre “JE Autos”, el logo y las fotos son una propuesta de la maqueta. Use el menú de arriba para comparar las tres paletas.</p>
+    </section>
+  </div>
+</div>
+</div><!--/showcase-->
+ 
+<script>
+const cars=[
+ {g:'g1',p:'89.900.000',t:'Mazda CX-30 Grand Touring',y:'2021',km:'42.500 km',c:'Bucaramanga',tr:'Automática',v:1},
+ {g:'g6',p:'62.500.000',t:'Renault Duster Intens',y:'2020',km:'68.000 km',c:'Bogotá',tr:'Mecánica',v:1},
+ {g:'g3',p:'58.000.000',t:'Chevrolet Onix Turbo',y:'2022',km:'31.200 km',c:'Medellín',tr:'Automática',v:0},
+ {g:'g2',p:'124.000.000',t:'Toyota Hilux 4x4',y:'2019',km:'89.400 km',c:'Cali',tr:'Mecánica',v:1},
+ {g:'g4',p:'41.900.000',t:'Kia Picanto Xline',y:'2021',km:'27.800 km',c:'Bucaramanga',tr:'Mecánica',v:0},
+ {g:'g5',p:'73.500.000',t:'Volkswagen T-Cross',y:'2022',km:'19.600 km',c:'Bogotá',tr:'Automática',v:1}];
+const card=c=>`<article class="card"><div class="ph ${c.g}">${c.v?'<span class="pin bdg bdg-v">✓ Verificado</span>':''}<span class="fav">♡</span><svg class="car"><use href="#car"/></svg><span class="cnt">📷 12</span></div><div class="cb"><div class="price"><em>$</em> ${c.p}</div><h3>${c.t} ${c.y}</h3><div class="sp"><span>◔ ${c.km}</span><span>⚙ ${c.tr}</span><span>📍 ${c.c}</span></div><div class="cf"><span class="bdg bdg-m">${c.y}</span><span class="link">Ver detalle →</span></div></div></article>`;
+document.getElementById('grid').innerHTML=cars.map(card).join('');
+document.getElementById('grid2').innerHTML=cars.concat(cars.slice(0,2)).map(card).join('');
+ 
+const app=document.getElementById('app');
+const meta={
+ confianza:{n:'Confianza',d:'azul marino + naranja; transmite seguridad, ideal donde se mueve dinero.',h:'Compra y vende con confianza'},
+ moderno:{n:'Moderno',d:'verde-azulado + ámbar con acentos en degradado; aire tecnológico y joven.',h:'Tu próximo carro, a un toque'},
+ automotriz:{n:'Automotriz',d:'negro, rojo y plata; potente y premium, como un configurador de autos.',h:'Domina el <em>camino</em>'}
+};
+function applyTheme(t){
+ app.dataset.theme=t;
+ document.querySelectorAll('.thm').forEach(x=>x.classList.toggle('on',x.dataset.t===t));
+ document.getElementById('capName').textContent=meta[t].n;
+ document.getElementById('capDesc').textContent=meta[t].d;
+ document.getElementById('loginH').innerHTML=meta[t].h;
+}
+const chooser=document.getElementById('chooser'), showcase=document.getElementById('showcase');
+function enter(t){applyTheme(t);chooser.style.display='none';showcase.hidden=false;window.scrollTo(0,0);}
+function backToMenu(){showcase.hidden=true;chooser.style.display='flex';window.scrollTo(0,0);}
+document.querySelectorAll('.ch-card').forEach(c=>c.addEventListener('click',()=>enter(c.dataset.t)));
+document.getElementById('backBtn').addEventListener('click',backToMenu);
+document.querySelectorAll('.thm').forEach(b=>b.addEventListener('click',()=>{applyTheme(b.dataset.t);window.scrollTo({top:0,behavior:'smooth'});}));
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+ t.classList.add('on');document.getElementById(t.dataset.s).classList.add('on');
+ window.scrollTo({top:0,behavior:'smooth'});
+}));
+</script>
+</body>
+</html>
